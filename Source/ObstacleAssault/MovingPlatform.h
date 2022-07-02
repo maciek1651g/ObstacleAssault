@@ -24,11 +24,5 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere)
-	int32 MyInt = 0;
-
-	UPROPERTY(EditAnywhere)
-	float MyFloat = 0.0001f;
-
-	UPROPERTY(EditAnywhere)
-	bool MyBool = false;
+	FVector ActorLocation = FVector(0.0f, 0.0f, 0.0f);
 };
