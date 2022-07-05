@@ -24,17 +24,17 @@ void AMovingPlatform::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	// Move platform forwards
-		//	Get current location
+	MovePlatform(DeltaTime);
+	RotatePlatform(DeltaTime);
+}
+
+void AMovingPlatform::MovePlatform(float DeltaTime)
+{
 	FVector CurrentLocation = GetActorLocation();
-		//	Add vector to that location
 	CurrentLocation += PlatformVelocity * DeltaTime;
-		//  Set the location
 	SetActorLocation(CurrentLocation);
-	// Send platform back if gone too far
-	   //  Check how far we've moved
 	float DistanceMoved = FVector::Dist(StartLocation, CurrentLocation);
-	   //  If we've moved too far, move back
+	
 	if (DistanceMoved > MaxDistance)
 	{
 		FVector PlatformDirection = PlatformVelocity.GetSafeNormal();
@@ -44,3 +44,9 @@ void AMovingPlatform::Tick(float DeltaTime)
 	}
 }
 
+void AMovingPlatform::RotatePlatform(float DeltaTime)
+{
+	FRotator CurrentRotation = GetActorRotation();
+	CurrentRotation.Yaw += DeltaTime * RotationSpeed;
+	SetActorRotation(CurrentRotation);
+}
